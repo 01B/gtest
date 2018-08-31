@@ -1,13 +1,19 @@
 package com.nopainnocode.gamehubtest.user.controller;
 
+import com.nopainnocode.gamehubtest.user.domain.User;
 import com.nopainnocode.gamehubtest.user.domain.dto.UserDto;
 import com.nopainnocode.gamehubtest.user.service.UserService;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -28,7 +34,9 @@ public class UserControllerTest {
     public void setUp() {
         userService = mock(UserService.class);
         UserController userController = new UserController(userService);
-        this.mockMvc = MockMvcBuilders.standaloneSetup(userController).build();
+        this.mockMvc = MockMvcBuilders.standaloneSetup(userController)
+                .setCustomArgumentResolvers(new PageableHandlerMethodArgumentResolver())
+                .build();
     }
 
     @Test
@@ -40,6 +48,17 @@ public class UserControllerTest {
 
     @Test
     public void 회원등록_페이지_getmapping() throws Exception {
+        // given
+        Page<User> page = new PageImpl<>(
+                Arrays.asList(
+                        new User("young il park", LocalDate.of(1985,1,24))
+                        , new User("so hyun park",LocalDate.of(1985,1,10))
+                )
+        );
+
+        when(userService.getUsers(any(Pageable.class)))
+                .thenReturn(page);
+
         mockMvc.perform(get("/users/register"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("userRegister"));
