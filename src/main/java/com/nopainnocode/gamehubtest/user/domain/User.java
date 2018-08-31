@@ -58,18 +58,4 @@ public class User implements Serializable {
 
     @Column(updatable = false)
     private LocalDateTime joinDate;
-
-    /**
-     * first name, middle name, last name 중에 두개 이상 중복되면
-     * return true;
-     */
-    public boolean isNameDuplicated(User user) {
-        return
-                this.firstName.equals(user.getFirstName())
-                        && this.middleName.equals(user.getMiddleName())
-                        || this.firstName.equals(user.getFirstName())
-                        && this.lastName.equals(user.getLastName())
-                        || this.middleName.equals(user.getMiddleName())
-                        && this.lastName.equals(user.getLastName());
-    }
 }

@@ -11,7 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 import java.time.LocalDate;
-import java.util.Arrays;
+import java.util.Collections;
 
 import static org.mockito.Mockito.*;
 
@@ -54,23 +54,79 @@ public class UserServiceTest {
         userService.register(userDto);
 
         // then
-        verify(userRepository, times(1)).findAll();
+        verify(userRepository, times(1)).findByFirstNameAndMiddleName("young", "il");
+        verify(userRepository, times(1)).findByFirstNameAndLastName("young", "park");
+        verify(userRepository, times(1)).findByMiddleNameAndLastName("il", "park");
         verify(userRepository,times(1)).save(any(User.class));
         verifyNoMoreInteractions(userRepository);
     }
 
     @Test(expected = InvalidNameException.class)
-    public void 회원등록시에_중복된_이름일_경우() {
+    public void 회원등록시에_first_middle_중복된_이름일_경우() {
 
         LocalDate birthday = LocalDate.of(1985, 1, 24);
-        when(userRepository.findAll())
+        UserDto userDto = new UserDto("young il park", birthday);
+        User user = new User(userDto.getName(), userDto.getBirthday());
+
+        when(userRepository.findByFirstNameAndMiddleName(user.getFirstName(), user.getMiddleName()))
                 .thenReturn(
-                        Arrays.asList(
+                        Collections.singletonList(
                                 new User("young il kim", birthday)
-                                , new User("young mi kim", birthday)
                         )
                 );
 
-        userService.register(new UserDto("young il park", birthday));
+        userService.register(userDto);
+        verify(userRepository, times(1)).findByFirstNameAndMiddleName("young", "il");
+        verifyNoMoreInteractions(userRepository);
+    }
+
+    @Test(expected = InvalidNameException.class)
+    public void 회원등록시에_first_last_중복된_이름일_경우() {
+
+        LocalDate birthday = LocalDate.of(1985, 1, 24);
+        UserDto userDto = new UserDto("young il park", birthday);
+        User user = new User(userDto.getName(), userDto.getBirthday());
+
+        when(userRepository.findByFirstNameAndMiddleName(user.getFirstName(), user.getMiddleName()))
+                .thenReturn(Collections.EMPTY_LIST);
+
+        when(userRepository.findByFirstNameAndLastName(user.getFirstName(), user.getLastName()))
+                .thenReturn(
+                        Collections.singletonList(
+                                new User("young mi park", birthday)
+                        )
+                );
+
+        userService.register(userDto);
+        verify(userRepository, times(1)).findByFirstNameAndMiddleName("young", "il");
+        verify(userRepository, times(1)).findByFirstNameAndLastName("young", "park");
+        verifyNoMoreInteractions(userRepository);
+    }
+
+    @Test(expected = InvalidNameException.class)
+    public void 회원등록시에_middle_last_중복된_이름일_경우() {
+
+        LocalDate birthday = LocalDate.of(1985, 1, 24);
+        UserDto userDto = new UserDto("young il park", birthday);
+        User user = new User(userDto.getName(), userDto.getBirthday());
+
+        when(userRepository.findByFirstNameAndMiddleName(user.getFirstName(), user.getMiddleName()))
+                .thenReturn(Collections.EMPTY_LIST);
+
+        when(userRepository.findByFirstNameAndLastName(user.getFirstName(), user.getLastName()))
+                .thenReturn(Collections.EMPTY_LIST);
+
+        when(userRepository.findByMiddleNameAndLastName(user.getMiddleName(), user.getLastName()))
+                .thenReturn(
+                        Collections.singletonList(
+                                new User("jae il park", birthday)
+                        )
+                );
+
+        userService.register(userDto);
+        verify(userRepository, times(1)).findByFirstNameAndMiddleName("young", "il");
+        verify(userRepository, times(1)).findByFirstNameAndLastName("young", "park");
+        verify(userRepository, times(1)).findByMiddleNameAndLastName("il", "park");
+        verifyNoMoreInteractions(userRepository);
     }
 }

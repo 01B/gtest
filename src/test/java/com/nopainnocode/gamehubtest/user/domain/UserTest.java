@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import java.time.LocalDate;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by no.pain.no.code@gmail.com
@@ -58,52 +58,5 @@ public class UserTest {
 
         // when
         User user = new User(fullName, birthday);
-    }
-
-    @Test
-    public void 이름_중복_검사() {
-        // given
-        LocalDate birthday = LocalDate.of(1985, 1, 24);
-        User user1 = new User("young il park", birthday);
-        // 이름 완전 일치
-        User user2 = new User("young il park", birthday);
-        // when then
-        assertTrue(user1.isNameDuplicated(user2));
-
-        // given
-        // first name, middle name 일치
-        user2 = new User("young il kim", birthday);
-        // when then
-        assertTrue(user1.isNameDuplicated(user2));
-
-        // given
-        // first name, last name 일치
-        user2 = new User("young mi park", birthday);
-        // when then
-        assertTrue(user1.isNameDuplicated(user2));
-
-        // given
-        // middle name, last name 일치
-        user2 = new User("joo il park", birthday);
-        // when then
-        assertTrue(user1.isNameDuplicated(user2));
-
-        // given
-        // first name 만 일치
-        user2 = new User("young bin kim", birthday);
-        // when then
-        assertFalse(user1.isNameDuplicated(user2));
-
-        // given
-        // middle name 만 일치
-        user2 = new User("sung il kim", birthday);
-        // when then
-        assertFalse(user1.isNameDuplicated(user2));
-
-        // given
-        // last name 만 일치
-        user2 = new User("sung kuk park", birthday);
-        // when then
-        assertFalse(user1.isNameDuplicated(user2));
     }
 }
