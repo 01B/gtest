@@ -41,6 +41,17 @@ public class UserControllerTest {
 
     @Test
     public void 회원목록_get_mapping_test() throws Exception {
+        // given
+        Page<User> page = new PageImpl<>(
+                Arrays.asList(
+                        new User("young il park", LocalDate.of(1985,1,24))
+                        , new User("so hyun park",LocalDate.of(1985,1,10))
+                )
+        );
+
+        when(userService.getUsers(any(Pageable.class)))
+                .thenReturn(page);
+
         mockMvc.perform(get("/users"))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("users"));
