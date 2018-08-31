@@ -15,16 +15,16 @@
   3. 코딩
 
 * Request Mapping
- - GET("/users") : 회원 목록을 불러와 template 페이지에 보여줍니다.
- - GET("/register") : 회원 등록 페이지로 이동합니다.
- - POST("/users") : 회원을 등록합니다.
+  - GET("/users") : 회원 목록을 불러와 template 페이지에 보여줍니다.
+  - GET("/register") : 회원 등록 페이지로 이동합니다.
+  - POST("/users") : 회원을 등록합니다.
  
 * 주요 문제 해결
- - 회원 등록시 필수값 : @Valid annotation을 사용하였습니다.
- - 회원 등록시 잘못된 이름 : server에서 InvalidNameException이 발생하고 메세지를 front로 던집니다. 
- - 회원 등록시 이름 중복 : server에서 InvalidNameException이 발생하고 메세지를 front로 던집니다.
+  - 회원 등록시 필수값 : @Valid annotation을 사용하였습니다.
+  - 회원 등록시 잘못된 이름 : server에서 InvalidNameException이 발생하고 메세지를 front로 던집니다. 
+  - 회원 등록시 이름 중복 : server에서 InvalidNameException이 발생하고 메세지를 front로 던집니다.
  
- * 주의사항
+* 주의사항
   - 프로젝트를 받으신 뒤 *Enable annotation processing 옵션을 체크해주세요.
   
 *'Build, Execution, Deployment'
