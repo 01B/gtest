@@ -1,10 +1,4 @@
-<#import "/spring.ftl" as spring/>
-
 <html>
-<head>
-    <link rel='stylesheet' type="text/css" href="/static/css/common.css">
-</head>
-
 <body>
 <div id="header">
     <H2>
