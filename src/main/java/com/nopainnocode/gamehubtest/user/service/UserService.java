@@ -8,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 /**
  * Created by no.pain.no.code@gmail.com
  * nopainnocode.tistory.com
@@ -25,6 +27,7 @@ public class UserService {
         return userRepository.findAll(pageable);
     }
 
+    @Transactional
     public User register(UserDto userDto) {
 
         User user = new User(userDto.getName(), userDto.getBirthday());
