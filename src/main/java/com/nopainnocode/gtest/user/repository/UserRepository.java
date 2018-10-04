@@ -1,6 +1,6 @@
-package com.nopainnocode.gamehubtest.user.repository;
+package com.nopainnocode.gtest.user.repository;
 
-import com.nopainnocode.gamehubtest.user.domain.User;
+import com.nopainnocode.gtest.user.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

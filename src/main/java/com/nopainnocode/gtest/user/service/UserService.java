@@ -1,9 +1,9 @@
-package com.nopainnocode.gamehubtest.user.service;
+package com.nopainnocode.gtest.user.service;
 
-import com.nopainnocode.gamehubtest.user.domain.User;
-import com.nopainnocode.gamehubtest.user.domain.dto.UserDto;
-import com.nopainnocode.gamehubtest.user.domain.exception.InvalidNameException;
-import com.nopainnocode.gamehubtest.user.repository.UserRepository;
+import com.nopainnocode.gtest.user.domain.User;
+import com.nopainnocode.gtest.user.domain.dto.UserDto;
+import com.nopainnocode.gtest.user.domain.exception.InvalidNameException;
+import com.nopainnocode.gtest.user.repository.UserRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;

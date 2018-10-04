@@ -1,4 +1,4 @@
-package com.nopainnocode.gamehubtest.user.domain.dto;
+package com.nopainnocode.gtest.user.domain.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

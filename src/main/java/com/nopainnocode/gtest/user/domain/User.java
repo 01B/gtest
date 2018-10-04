@@ -1,6 +1,6 @@
-package com.nopainnocode.gamehubtest.user.domain;
+package com.nopainnocode.gtest.user.domain;
 
-import com.nopainnocode.gamehubtest.user.domain.exception.InvalidNameException;
+import com.nopainnocode.gtest.user.domain.exception.InvalidNameException;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

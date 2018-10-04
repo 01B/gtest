@@ -1,4 +1,4 @@
-package com.nopainnocode.gamehubtest.user.domain.exception;
+package com.nopainnocode.gtest.user.domain.exception;
 
 /**
  * Created by no.pain.no.code@gmail.com

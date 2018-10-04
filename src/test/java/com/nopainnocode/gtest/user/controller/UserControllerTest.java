@@ -1,8 +1,8 @@
-package com.nopainnocode.gamehubtest.user.controller;
+package com.nopainnocode.gtest.user.controller;
 
-import com.nopainnocode.gamehubtest.user.domain.User;
-import com.nopainnocode.gamehubtest.user.domain.dto.UserDto;
-import com.nopainnocode.gamehubtest.user.service.UserService;
+import com.nopainnocode.gtest.user.domain.User;
+import com.nopainnocode.gtest.user.domain.dto.UserDto;
+import com.nopainnocode.gtest.user.service.UserService;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.data.domain.Page;
